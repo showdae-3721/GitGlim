@@ -1,0 +1,43 @@
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+
+using namespace std;
+
+int solution(int a, int b, int c, int d)
+{
+	// 벡터 정렬
+	vector<int> v = { a, b, c, d };
+	sort(v.begin(), v.end());
+
+	int x = v[0];
+	int	y = v[1];
+	int	z = v[2];
+	int	w = v[3];
+
+	// 4개 모두 같음 [1111 × p점]
+	if (x == w)
+		return 1111 * x;
+
+	// 3개가 같고 1개가 다름 [(10 × p + q)2 점]
+	if (x == z && z != w) // 1 ~ 3 같음
+		return pow(10 * x + w, 2); // pow(): 제곱
+	if (y == w && x != y) // 2 ~ 3 같음
+		return pow(10 * y + x, 2);
+
+	// 2쌍이 같음 [(p + q) × |p - q|점]
+	if (x == y && z == w)
+		return (x + z) * abs(x - z); // abs(): 절대값
+
+	// 1쌍이 같음 [q × r점]
+	if (x == y)
+		return z * w;
+	if (y == z)
+		return x * w;
+	if (z == w)
+		return x * y;
+
+	// 모두 다름 [가장 작은 값]
+	return x;
+}

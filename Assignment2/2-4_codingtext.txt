@@ -1,0 +1,26 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+bool isParallel(const vector<int>& a, const vector<int>& b, const vector<int>& c, const vector<int>& d)
+{
+    return (b[1] - a[1]) * (d[0] - c[0]) == (d[1] - c[1]) * (b[0] - a[0]);
+}
+
+int solution(vector<vector<int>> dots)
+{
+	vector<int> a = dots[0];
+	vector<int> b = dots[1];
+	vector<int> c = dots[2];
+	vector<int> d = dots[3];
+
+	if (isParallel(a, b, c, d))
+		return 1;
+	if (isParallel(a, c, b, d))
+		return 1;
+	if (isParallel(a, d, b, c))
+		return 1;
+
+	return 0;
+}
